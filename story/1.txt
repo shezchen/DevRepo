@@ -1,0 +1,17 @@
+# background:star
+[name = "person1"][icon = "test_icon"]: 你好aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+[option = 2]
+[name = "person0"][1]: c1
+[name = "person0"][2]: c2?
+# background:star
+[choice = 1][name = "person2"][icon = "test_icon"]: 测试a
+[choice = 2][name = "person2"][icon = "test_icon"]: 测试b
+[narration]: 旁白.
+[name = "person1"][icon = "test_icon"]: 你好
+[option = 2]
+[name = "person0"][1]: 做?
+[name = "person0"][2]: 吗?
+[choice = 1][name = "person2"][icon = "test_icon"]: 测试1
+[choice = 2][name = "person2"][icon = "test_icon"]: 测试2
+# background:star
+[narration]: 旁白.the last line
