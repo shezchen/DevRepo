@@ -33,7 +33,11 @@ public static class DialogFileReader
         int WritingIndex = 0;
         string[] lines = System.IO.File.ReadAllLines(file);
         lines = Array.FindAll(lines, l => l.Contains('#') || l.Contains('['));
+        
         dialogDatabase = new OneDialog[lines.Length];
+        PlayedDialogDatabase = new List<ReviewDialog>();
+        //在此处初始化对话和对话回顾数组
+        
         for (int i = 0; i < lines.Length; i++)
         {
             dialogDatabase[i] = new OneDialog();

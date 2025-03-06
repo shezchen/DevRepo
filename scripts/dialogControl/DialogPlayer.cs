@@ -35,6 +35,9 @@ public class DialogPlayer : MonoBehaviour
         {
             //new sentence
             CallCount = 0;
+            
+            PreSentence = sentence;
+            //保存正在输出的完整字符串
         }
         else
         {
@@ -45,13 +48,14 @@ public class DialogPlayer : MonoBehaviour
         {
             playIndex = sentence.Length - 1;
         }
-        PreSentence = sentence;
+        
         if(OutSentence != sentence)
             OutSentence = sentence[0 .. (playIndex+1)] ?? "";
         return OutSentence;
     }
 
-    [CanBeNull] public OneDialog[] DialogDatabase;
+    [CanBeNull] public OneDialog[] DialogDatabase;//本次播放中的对话数据库
+    [CanBeNull] public List<ReviewDialog> PlayedDialogDatabase;//对话回顾数据库
     private void Awake()
     {
         if (Instance == null)
@@ -86,25 +90,34 @@ public class DialogPlayer : MonoBehaviour
     private bool previousMouseState = false;
     void Update()
     {
+        //处理播放期间的鼠标点击
+        
+        if(!isDialogPlaying)
+            return;
         
         if (Input.GetMouseButtonDown(0) && !previousMouseState)
         {
             if (DialogDatabase == null)
             {
+                Debug.Log("DialogDatabase is null");
                 return;
             }
 
             if (OutSentence.Length < DialogDatabase[DialogPlayingIndex].Sentence.Length)
             {
+                //正在滚动输出对话：全部显示
                 OutSentence = DialogDatabase[DialogPlayingIndex].Sentence;
             }
             else
             {
+                //完成滚动输出：下一句
                 if(DialogDatabase[DialogPlayingIndex].state != OneDialog.DialogState.Option)
                 {
+                    OutSentence = "";
                     DialogPlayingIndex++;
                     if (DialogPlayingIndex >= DialogDatabase.Length)
                     {
+                        //TODO:对话结束
                         DialogCanvas.gameObject.SetActive(false); 
                         DialogPlayer.Instance.isDialogPlaying = false;
                         GameStateControl.Instance.SetGameState(GameStateControl.GameState.Menu);

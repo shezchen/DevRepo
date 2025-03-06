@@ -55,6 +55,13 @@ public class dialogText : MonoBehaviour
                     speaker = DialogPlayer.Instance.DialogDatabase[DialogPlayer.Instance.DialogPlayingIndex]
                         .Speaker;
                     targetSpeakerObject.GetComponent<TextMeshProUGUI>().text = speaker;
+                    
+                    DialogPlayer.Instance.PlayedDialogDatabase.Add(new ReviewDialog()
+                    {
+                        state = ReviewDialog.state.normal,
+                        Speaker = speaker,
+                        Sentence = sentence
+                    });
                     break;
                 
                 case OneDialog.DialogState.NormalChoice:
@@ -62,6 +69,7 @@ public class dialogText : MonoBehaviour
                     if (DialogPlayer.Instance.DialogDatabase[DialogPlayer.Instance.DialogPlayingIndex].NeedOption !=
                         playerChoiceNumber)
                     {
+                        //如果不是当前选项，跳过
                         DialogPlayer.Instance.DialogPlayingIndex++;
                         break;
                     }
@@ -72,6 +80,12 @@ public class dialogText : MonoBehaviour
                     speaker = DialogPlayer.Instance.DialogDatabase[DialogPlayer.Instance.DialogPlayingIndex]
                         .Speaker;
                     targetSpeakerObject.GetComponent<TextMeshProUGUI>().text = speaker;
+                    DialogPlayer.Instance.PlayedDialogDatabase.Add(new ReviewDialog()
+                    {
+                        state = ReviewDialog.state.normal,
+                        Speaker = speaker,
+                        Sentence = sentence
+                    });
                     break;
                 
                 case OneDialog.DialogState.Narration:
@@ -81,6 +95,12 @@ public class dialogText : MonoBehaviour
                     targetTextObject.GetComponent<TextMeshProUGUI>().text = DialogPlayer.GenDialogString(sentence);
                     speaker = "";
                     targetSpeakerObject.GetComponent<TextMeshProUGUI>().text = speaker;
+                    DialogPlayer.Instance.PlayedDialogDatabase.Add(new ReviewDialog()
+                    {
+                        state = ReviewDialog.state.narration,
+                        Speaker = "",
+                        Sentence = sentence
+                    });
                     break;
                 
                 case OneDialog.DialogState.NarrationChoice:
@@ -97,6 +117,12 @@ public class dialogText : MonoBehaviour
                     targetTextObject.GetComponent<TextMeshProUGUI>().text = DialogPlayer.GenDialogString(sentence);
                     speaker = "";
                     targetSpeakerObject.GetComponent<TextMeshProUGUI>().text = speaker;
+                    DialogPlayer.Instance.PlayedDialogDatabase.Add(new ReviewDialog()
+                    {
+                        state = ReviewDialog.state.narration,
+                        Speaker = "",
+                        Sentence = sentence
+                    });
                     break;
                 
                 case OneDialog.DialogState.Background:

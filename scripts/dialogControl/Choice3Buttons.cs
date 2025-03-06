@@ -26,6 +26,12 @@ public class Choice3Buttons : MonoBehaviour
         {
             
             Debug.Log("Button 1 Clicked");
+            DialogPlayer.Instance.PlayedDialogDatabase.Add(new ReviewDialog()
+            {
+                state = ReviewDialog.state.choice,
+                speaker = "",
+                sentence = button1TextString
+            });
             dialogText.Instance.playerChoiceNumber = 1;
             DialogPlayer.Instance.DialogPlayingIndex++;
             button1.gameObject.SetActive(false);
@@ -35,6 +41,12 @@ public class Choice3Buttons : MonoBehaviour
         button2.onClick.AddListener(()  =>
         {
             Debug.Log("Button 2 Clicked");
+            DialogPlayer.Instance.PlayedDialogDatabase.Add(new ReviewDialog()
+            {
+                state = ReviewDialog.state.choice,
+                speaker = "",
+                sentence = button2TextString
+            });
             dialogText.Instance.playerChoiceNumber = 2;
             DialogPlayer.Instance.DialogPlayingIndex++;
             button1.gameObject.SetActive(false);
@@ -44,6 +56,12 @@ public class Choice3Buttons : MonoBehaviour
         button3.onClick.AddListener(() =>
         {
             Debug.Log("Button 3 Clicked");
+            DialogPlayer.Instance.PlayedDialogDatabase.Add(new ReviewDialog()
+            {
+                state = ReviewDialog.state.choice,
+                speaker = "",
+                sentence = button3TextString
+            });
             dialogText.Instance.playerChoiceNumber = 3;
             DialogPlayer.Instance.DialogPlayingIndex++;
             button1.gameObject.SetActive(false);
@@ -66,12 +84,8 @@ public class Choice3Buttons : MonoBehaviour
 
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        button1.gameObject.SetActive(false);
+        button2.gameObject.SetActive(false);
+        button3.gameObject.SetActive(false);
     }
 }

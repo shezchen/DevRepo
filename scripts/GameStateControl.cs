@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameStateControl : MonoBehaviour
 {
     public static GameStateControl Instance { get; private set; }
-
+    public string storyFile = "Assets/story/1.txt";
     public enum GameState
     {
         Menu,
@@ -12,7 +12,7 @@ public class GameStateControl : MonoBehaviour
         Pause,
         Story
     }
-    GameState _gameState=GameState.Menu;
+    GameState _gameState=GameState.Menu;//默认主界面
     public void SetGameState(GameStateControl.GameState gameState)
     {
         _gameState = gameState;
@@ -25,11 +25,17 @@ public class GameStateControl : MonoBehaviour
             case GameStateControl.GameState.Pause:
                 break;
             case GameStateControl.GameState.Story:
-                DialogPlayer.Instance.StartDialogPlay("Assets/story/1.txt");
+                StoryPlay();
                 break;
             
         }
     }
+
+    public void StoryPlay()
+    {
+        DialogPlayer.Instance.StartDialogPlay(storyFile);
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {

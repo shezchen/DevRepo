@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 public class OneDialog
 {
-    [CanBeNull]public Background background;
+    [CanBeNull]public Background background;//TODO:背景控制
     public string BackgroundName="";
 
     public enum DialogState
@@ -29,15 +29,5 @@ public class OneDialog
     public string SpeakerIcon="";
     
     [CanBeNull]public OneDialog[] OptionDialogs;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
